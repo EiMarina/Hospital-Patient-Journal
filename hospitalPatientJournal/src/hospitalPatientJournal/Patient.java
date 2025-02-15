@@ -1,22 +1,20 @@
 package hospitalPatientJournal;
 
-import java.util.Date;
-
 public class Patient {
 	private int id;
 	private String familyName;
+	private int birthYear;
 	private String diagnosis;
-	private Date admissionDate;
 	private Department department;
 	private String status;
 	private static int COUNTER = 0;
 	
 	// Constructor for the patient class
-	public Patient(String familyName, String diagnosis, Date admissionDate, Department department, String status) {
+	public Patient(String familyName, String diagnosis, int birthYear, Department department, String status) {
+		this.id = ++COUNTER;		
 		this.familyName = familyName;
-		this.id = ++COUNTER;
+		this.birthYear = birthYear;	
 		this.diagnosis = diagnosis;
-		this.admissionDate = admissionDate;
 		this.department = department;
 		this.status = status;
     }
@@ -37,21 +35,22 @@ public class Patient {
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
+	
+	public int getBirthYear() {
+		return birthYear;
+	}
 
+	public void setbirthYear(int birthYear) {
+		this.birthYear = birthYear;
+		
+	}
 	public String getDiagnosis() {
 		return diagnosis;
+		
 	}
 
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
-	}
-
-	public Date getAdmissionDate() {
-		return admissionDate;
-	}
-
-	public void setAdmissionDate(Date admissionDate) {
-		this.admissionDate = admissionDate;
 	}
 
 	public Department getDepartment() {
@@ -72,10 +71,10 @@ public class Patient {
 	
 	// Method of displaying all the information about the patient
 	public void displayPatientInfo() {
-	      System.out.println("Patient ID: " + id);
+	      System.out.println("Patient's ID: " + id);
 	      System.out.println("Family Name: " + familyName);
+	      System.out.println("Year of Birth: " + birthYear);
 	      System.out.println("Diagnosis: " + diagnosis);
-	      System.out.println("Admission Date: " + admissionDate);
 	      System.out.println("Department: " + department);
 	      System.out.println("Status: " + status);
 	}
