@@ -10,7 +10,7 @@ public class Patient {
 	private static int COUNTER = 0;
 	
 	// Constructor for the patient class
-	public Patient(String familyName, String diagnosis, int birthYear, Department department, String status) {
+	public Patient(String familyName, int birthYear, String diagnosis, Department department, String status) {
 		this.id = ++COUNTER;		
 		this.familyName = familyName;
 		this.birthYear = birthYear;	

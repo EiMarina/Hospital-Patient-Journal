@@ -1,6 +1,5 @@
 package hospitalPatientJournal;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -8,13 +7,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Create an object for the "Urology" department
-        Department urologyDepartment = new Department("Urology Department");
+        Department urologyDepartment = new Department("Urology");
 
         // Add patients to the department
-        urologyDepartment.addPatient(new Patient("Ivanov", "Kidney Stones", new Date(), urologyDepartment, "Active"));
-        urologyDepartment.addPatient(new Patient("Petrov", "Prostate Enlargement", new Date(), urologyDepartment, "Active"));
-        urologyDepartment.addPatient(new Patient("Sidorov", "Urinary Tract Infection", new Date(), urologyDepartment, "Active"));
-        urologyDepartment.addPatient(new Patient("Kuznetsova", "Bladder Infection", new Date(), urologyDepartment, "Active"));
+        urologyDepartment.addPatient(new Patient("Ivanov", 1999, "Kidney Stones", urologyDepartment, "Active"));
+        urologyDepartment.addPatient(new Patient("Petrov", 1984, "Prostate Enlargement", urologyDepartment, "Active"));
+        urologyDepartment.addPatient(new Patient("Sidorov", 2001, "Urinary Tract Infection", urologyDepartment, "Active"));
+        urologyDepartment.addPatient(new Patient("Kuznetsova", 1976, "Bladder Infection", urologyDepartment, "Active"));
         
         // Print the list of patients in the urology department
         urologyDepartment.printPatients();
