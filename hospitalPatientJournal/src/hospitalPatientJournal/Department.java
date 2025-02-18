@@ -3,68 +3,107 @@ package hospitalPatientJournal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a hospital department that contains a list of patients.
+ */
 public class Department {
-	private String departmentName; // Department name
-	private List<Patient> patients; // list of patients in the department
+    private String departmentName; // Name of the department
+    private List<Patient> patients; // List of patients in the department
+    private static List<Department> departments = new ArrayList<>(); // List of all departments
 
-	// Constructor
-	public Department(String departmentName) {
-		this.departmentName = departmentName;
-		this.patients = new ArrayList<>();
-	}
+    // Predefined departments
+    public static final Department CARDIOLOGY = new Department("Cardiology");
+    public static final Department NEUROLOGY = new Department("Neurology");
+    public static final Department UROLOGY = new Department("Urology");
 
-	// Method adds patients to department
-	public void addPatient(Patient patient) {
-		patients.add(patient);
-		System.out.println("Patient " + patient.getFamilyName() + " added to the department " + departmentName);
-	}
+    // Constructor to initialize a new department
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
+        this.patients = new ArrayList<>();
+        departments.add(this);
+    }
 
-	// Method for deleting patients by ID
-	public void removePatient(int patientId) {
-		Patient patientToRemove = findPatientById(patientId);
-		if (patientToRemove != null) {
-			patients.remove(patientToRemove);
-			System.out.println("Patient with ID " + patientId + " removed from the department " + departmentName);
-		} else {
-			System.out.println("Patient with ID " + patientId + " not found.");
-		}
-	}
+    /**
+     * Returns the name of the department.
+     */
+    public String getName() {
+        return departmentName;
+    }
 
-	// Method to get patients from the department
-	public List<Patient> getPatients() {
-		return patients;
-	}
+    /**
+     * Adds a new patient to the department and prints their details.
+     */
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+        System.out.println("Patient added to department " + departmentName + ":\n" + patient);
+    }
 
-	// Method to print information about all patients in the department
-	public void printPatients() {
-		if (patients.isEmpty()) {
-			System.out.println("There are no patients in the department " + departmentName + ".");
-		} else {
-			System.out.println("List of patients in the department " + departmentName + ":");
-			for (Patient patient : patients) {
-				System.out.println(patient);
-			}
-		}
-	}
+    /**
+     * Removes a patient from the department by their ID.
+     * If the patient is found, their details are printed before removal.
+     */
+    public void removePatient(int patientId) {
+        Patient patientToRemove = findPatientById(patientId);
+        if (patientToRemove != null) {
+            patients.remove(patientToRemove);
+            System.out.println("Patient removed from department " + departmentName + ":\n" + patientToRemove);
+        } else {
+            System.out.println("Patient with ID " + patientId + " not found.");
+        }
+    }
 
-	// Method to update patient status
-	public void updatePatientStatus(int patientId, String newStatus) {
-		Patient patient = findPatientById(patientId);
-		if (patient != null) {
-			patient.setStatus(newStatus);
-			System.out.println("Patient " + patient.getFamilyName() + "'s status updated to " + newStatus);
-		} else {
-			System.out.println("Patient with ID " + patientId + " not found.");
-		}
-	}
+    /**
+     * Returns the list of patients in the department.
+     */
+    public List<Patient> getPatients() {
+        return patients;
+    }
 
-	// Method to find a patient by ID
-	private Patient findPatientById(int patientId) {
-		for (Patient patient : patients) {
-			if (patient.getId() == patientId) {
-				return patient;
-			}
-		}
-		return null;
-	}
+    /**
+     * Prints all patients in the department.
+     */
+    public void printPatients() {
+        if (patients.isEmpty()) {
+            System.out.println("There are no patients in the department " + departmentName + ".");
+        } else {
+            System.out.println("List of patients in the department " + departmentName + ":");
+            for (Patient patient : patients) {
+                System.out.println(patient); // Uses the overridden toString() method
+            }
+        }
+    }
+
+    /**
+     * Updates the status of a patient based on their ID.
+     * If the patient is found, the updated information is printed.
+     */
+    public void updatePatientStatus(int patientId, String newStatus) {
+        Patient patient = findPatientById(patientId);
+        if (patient != null) {
+            patient.setStatus(newStatus);
+            System.out.println("Updated patient status:\n" + patient);
+        } else {
+            System.out.println("Patient with ID " + patientId + " not found.");
+        }
+    }
+
+    /**
+     * Finds a patient by their ID and returns the Patient object.
+     * If not found, returns null.
+     */
+    private Patient findPatientById(int patientId) {
+        for (Patient patient : patients) {
+            if (patient.getId() == patientId) {
+                return patient;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the list of all departments.
+     */
+    public static List<Department> getAllDepartments() {
+        return departments;
+    }
 }

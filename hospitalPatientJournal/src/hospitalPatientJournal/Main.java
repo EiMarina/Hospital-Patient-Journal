@@ -8,15 +8,37 @@ public class Main {
 
         // Create an object for the "Urology" department
         Department urologyDepartment = new Department("Urology");
+        Department cardiologyDepartment = new Department("Cardiology");
+        Department neurologyDepartment = new Department("Neurology");
 
-        // Add patients to the department
+        // Add patients to the "Urology" department 
         urologyDepartment.addPatient(new Patient("Ivanov", 1999, "Kidney Stones", urologyDepartment, "Active"));
         urologyDepartment.addPatient(new Patient("Petrov", 1984, "Prostate Enlargement", urologyDepartment, "Active"));
         urologyDepartment.addPatient(new Patient("Sidorov", 2001, "Urinary Tract Infection", urologyDepartment, "Active"));
         urologyDepartment.addPatient(new Patient("Kuznetsova", 1976, "Bladder Infection", urologyDepartment, "Active"));
+      
+        //Add patients to the "Cardiology" department 
+        cardiologyDepartment.addPatient(new Patient("Turner", 1999, "Myocarditis", cardiologyDepartment, "Active"));
+        cardiologyDepartment.addPatient(new Patient("Turner", 1986, "Heart Attack", cardiologyDepartment, "Active"));
+        cardiologyDepartment.addPatient(new Patient("Davis", 2001, "Arrhythmia", cardiologyDepartment, "Active"));
         
-        // Print the list of patients in the urology department
+        //Add patients to the "Neurology" department
+        neurologyDepartment.addPatient(new Patient ("Cohan", 1983, "Concussion", neurologyDepartment, "Active" ));
+        neurologyDepartment.addPatient(new Patient("Davis", 2003, "Spinal Cord Injury", neurologyDepartment, "Active"));
+        neurologyDepartment.addPatient(new Patient("Polansky", 1972, "Epilepsy", neurologyDepartment, "Active"));
+        neurologyDepartment.addPatient(new Patient("Steiman", 1998, "Concussion", neurologyDepartment, "Active"));
+        
+        // Display patient information
+        System.out.println("Patients in Urology Department:");
         urologyDepartment.printPatients();
+        
+        System.out.println("Patients in Cardiology Department:");
+        cardiologyDepartment.printPatients();
+
+        System.out.println("\nPatients in Neurology Department:");
+        neurologyDepartment.printPatients();
+        
+       
 
         // User actions
         boolean exit = false;
