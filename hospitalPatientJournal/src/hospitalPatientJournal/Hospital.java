@@ -1,74 +1,127 @@
 package hospitalPatientJournal;
 
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Class representing a hospital that manages departments and patients.
+ */
 public class Hospital {
-	private ArrayList<Patient> patients = new ArrayList<Patient>();
-	private ArrayList<Department> departments = new ArrayList<Department>();
-	
-	 // Creating a new department
-    public void addDepartment(Department department) {
-		this.departments.add(department);
+    private List<Patient> patients; // List of all patients in the hospital
+    
+    // Constructor to initialize the hospital
+    public Hospital() {
+        this.patients = new ArrayList<>();
+        new ArrayList<>();
     }
     
-	// Creating a new patient
-	public void addPatient(Patient patient) {
-		this.patients.add(patient);
-		System.out.println("Patient is added!");
-	}
-	
-	// Deleting a patient by deleting his id
-	public void deletePatient(int id) {
-	    patients.removeIf(patient -> patient.getId() == id);
-	    System.out.println("Patient is deleted!");
-	}
-	
-		// Searching patients by family name       
-	 public ArrayList<Patient> searchByFamilyName(String familyName) {
-	    ArrayList<Patient> filteredPatients = new ArrayList<>();
-	    if (familyName == null) return filteredPatients;
-	       for (Patient patient : patients) {
-	           if (patient.getFamilyName().equalsIgnoreCase(familyName)) {
-	              filteredPatients.add(patient);
-	              }
-	           }
-	           return filteredPatients;
-	  }
+    /**
+     * Adds a new patient to the corresponding department.
+     */
+    public void addPatient(Patient patient) {
+        this.patients.add(patient);
+        patient.getDepartment().addPatient(patient);
+    }
+     
+    /**
+     * Finds a patient by ID.
+     */
+    private Patient findPatientById(int patientId) {
+        for (Patient patient : patients) {
+            if (patient.getId() == patientId) {
+                return patient;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Deletes a patient by their ID from the corresponding department.
+     */
+    public void deletePatient(int patientId) {
+        Patient patientToDelete = null;
+        for (Patient patient : patients) {
+            if (patient.getId() == patientId) {
+                patientToDelete = patient;
+                break;
+            }
+        }
+        if (patientToDelete != null) {
+            patientToDelete.getDepartment().removePatient(patientId); // Deletes a patient from the department
+            patients.remove(patientToDelete); // Deletes a patient from the journal
+            System.out.println("Patient with ID " + patientId + " is deleted!");
+        } else {
+            System.out.println("Patient with ID " + patientId + " is not found.");
+        }
+    }
+    
+    /**
+     * Updates the status of a patient based on their ID.
+     * If the patient is found, the updated information is printed.
+     */
+    public void updatePatientStatus(int patientId, String status) {
+    	 Patient patient = findPatientById(patientId);
+        if (patient != null) {
+            patient.setStatus(status);
+            System.out.println("Updated patient status:\n" + patient);
+        } else {
+            System.out.println("Patient with ID " + patientId + " not found.");
+        }
+    }
 
-	  // Searching patients by diagnosis
-	  public ArrayList<Patient> searchByDiagnosis(String diagnosis) {
-	     ArrayList<Patient> filteredPatients = new ArrayList<>();
-	     if (diagnosis == null) return filteredPatients;
-	       for (Patient patient : patients) {
-	           if (patient.getDiagnosis().equalsIgnoreCase(diagnosis)) {
-	              filteredPatients.add(patient);
-	              }
-	           }
-	           return filteredPatients;
-	  }
-	    
-	  // Searching patients by department
-	  public ArrayList<Patient> searchByDepartment(Department department) {
-	     ArrayList<Patient> filteredPatients = new ArrayList<>();
-	     if (department == null) return filteredPatients;
-	       for (Patient patient : patients) {
-	           if (patient.getDepartment().equals(department)) {
-	               filteredPatients.add(patient);
-	               }
-	           }
-	           return filteredPatients;
-	  }    
-	  
-	  // Searching patients by family name and year of birth
-	  public ArrayList<Patient> searchByFamilyNameAndBirthYear (String familyName, int birthYear) {
-		  ArrayList<Patient> filteredPatients = new ArrayList<>();    
-		  if (familyName == null) return filteredPatients;
-		    for (Patient patient : patients) {
-	            if (patient.getFamilyName().equalsIgnoreCase(familyName) && patient.getBirthYear() == birthYear) {
-	            	filteredPatients.add(patient);
-	            	}
-		        }
-	            return filteredPatients;
-	                
-	  }
+    /**
+     * Searches for patients by family name.
+     */
+    public List<Patient> searchByFamilyName(String familyName) {
+        List<Patient> filteredPatients = new ArrayList<>();
+        if (familyName == null) return filteredPatients;
+        for (Patient patient : patients) {
+            if (patient.getFamilyName().equalsIgnoreCase(familyName)) {
+                filteredPatients.add(patient);
+            }
+        }
+        return filteredPatients;
+    }
+
+    /**
+     * Searches for patients by the year of birth.
+     */
+     public List<Patient> searchByBirthYear(int birthYear) {
+         List<Patient> filteredPatients = new ArrayList<>();
+    	 for (Patient patient : patients) {
+    	     if (patient.getBirthYear() == birthYear) {
+    	         filteredPatients.add(patient);
+    	     }
+    	     }
+    	 return filteredPatients;
+    }
+
+    /**
+     * Searches for patients by family name and year of birth.
+     */
+    public List<Patient> searchByFamilyNameAndBirthYear(String familyName, int birthYear) {
+        List<Patient> filteredPatients = new ArrayList<>();
+        if (familyName == null) return filteredPatients;
+        for (Patient patient : patients) {
+            if (patient.getFamilyName().equalsIgnoreCase(familyName) && patient.getBirthYear() == birthYear) {
+                filteredPatients.add(patient);
+            }
+        }
+        return filteredPatients;
+    }
+    
+    /**
+     * Searches for patients by diagnosis.
+     */
+    public List<Patient> searchByDiagnosis(String diagnosis) {
+        List<Patient> filteredPatients = new ArrayList<>();
+        if (diagnosis == null) return filteredPatients;
+        for (Patient patient : patients) {
+        if (patient.getDiagnosis().equalsIgnoreCase(diagnosis)) {
+            filteredPatients.add(patient);
+            }
+        }
+        return filteredPatients;
+    }
+       
 }
