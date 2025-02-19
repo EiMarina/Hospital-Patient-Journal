@@ -31,27 +31,19 @@ public class Department {
     }
 
     /**
-     * Adds a new patient to the department and prints their details.
+     * Adds a new patient.
      */
     public void addPatient(Patient patient) {
         patients.add(patient);
-        System.out.println("Patient added to department " + departmentName + ":\n" + patient);
     }
-
+    
     /**
-     * Removes a patient from the department by their ID.
-     * If the patient is found, their details are printed before removal.
+     * Deletes a patient.
      */
-    public void removePatient(int patientId) {
-        Patient patientToRemove = findPatientById(patientId);
-        if (patientToRemove != null) {
-            patients.remove(patientToRemove);
-            System.out.println("Patient removed from department " + departmentName + ":\n" + patientToRemove);
-        } else {
-            System.out.println("Patient with ID " + patientId + " not found.");
-        }
-    }
-
+	public void removePatient(int patientId) {
+		  patients.removeIf(patient -> patient.getId() == patientId);	
+	}
+    
     /**
      * Returns the list of patients in the department.
      */
@@ -71,33 +63,6 @@ public class Department {
                 System.out.println(patient); // Uses the overridden toString() method
             }
         }
-    }
-
-    /**
-     * Updates the status of a patient based on their ID.
-     * If the patient is found, the updated information is printed.
-     */
-    public void updatePatientStatus(int patientId, String newStatus) {
-        Patient patient = findPatientById(patientId);
-        if (patient != null) {
-            patient.setStatus(newStatus);
-            System.out.println("Updated patient status:\n" + patient);
-        } else {
-            System.out.println("Patient with ID " + patientId + " not found.");
-        }
-    }
-
-    /**
-     * Finds a patient by their ID and returns the Patient object.
-     * If not found, returns null.
-     */
-    private Patient findPatientById(int patientId) {
-        for (Patient patient : patients) {
-            if (patient.getId() == patientId) {
-                return patient;
-            }
-        }
-        return null;
     }
 
     /**

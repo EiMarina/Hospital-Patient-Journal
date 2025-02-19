@@ -1,8 +1,5 @@
 package hospitalPatientJournal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class representing a patient in a hospital.
  */
