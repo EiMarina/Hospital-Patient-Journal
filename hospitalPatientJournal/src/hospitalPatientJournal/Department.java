@@ -65,10 +65,7 @@ public class Department {
         }
     }
 
-    /**
-     * Returns the list of all departments.
-     */
-    public static List<Department> getAllDepartments() {
-        return departments;
-    }
+	public String getDepartmentName() {
+		return departmentName;
+	}
 }

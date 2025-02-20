@@ -20,9 +20,7 @@ public class Hospital {
      */
     public void addPatient(Patient patient) {
         this.patients.add(patient);
-        patient.getDepartment().addPatient(patient);
-    }
-     
+    } 
     /**
      * Finds a patient by ID.
      */
@@ -47,9 +45,10 @@ public class Hospital {
             }
         }
         if (patientToDelete != null) {
+        	String familyName = patientToDelete.getFamilyName();
             patientToDelete.getDepartment().removePatient(patientId); // Deletes a patient from the department
             patients.remove(patientToDelete); // Deletes a patient from the journal
-            System.out.println("Patient with ID " + patientId + " is deleted!");
+            System.out.println("Patient with ID " + patientId + " and last name " + familyName + " is deleted!");
         } else {
             System.out.println("Patient with ID " + patientId + " is not found.");
         }
@@ -122,6 +121,6 @@ public class Hospital {
             }
         }
         return filteredPatients;
-    }
-       
+        
+    }    
 }
