@@ -1,9 +1,13 @@
 package hospitalPatientJournal;
 
+import java.io.Serializable;
+
 /**
  * Class representing a patient in a hospital.
  */
-public class Patient {
+public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L; // Recomend to add serialVersionUID
+
     private int id; // Unique patient ID
     private String familyName; // Patient's last name
     private int birthYear; // Patient's birth year
@@ -73,4 +77,3 @@ public class Patient {
         System.out.println(this.toString());
     }
 }
-

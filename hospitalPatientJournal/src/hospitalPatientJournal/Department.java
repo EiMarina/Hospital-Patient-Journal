@@ -1,12 +1,15 @@
 package hospitalPatientJournal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class representing a hospital department that contains a list of patients.
  */
-public class Department {
+public class Department implements Serializable {
+    private static final long serialVersionUID = 1L; // Add serialVersionUID
+
     private String departmentName; // Name of the department
     private List<Patient> patients; // List of patients in the department
     private static List<Department> departments = new ArrayList<>(); // List of all departments
@@ -40,9 +43,9 @@ public class Department {
     /**
      * Deletes a patient.
      */
-	public void removePatient(int patientId) {
-		  patients.removeIf(patient -> patient.getId() == patientId);	
-	}
+    public void removePatient(int patientId) {
+        patients.removeIf(patient -> patient.getId() == patientId);	
+    }
     
     /**
      * Returns the list of patients in the department.
@@ -65,7 +68,7 @@ public class Department {
         }
     }
 
-	public String getDepartmentName() {
-		return departmentName;
-	}
+    public String getDepartmentName() {
+        return departmentName;
+    }
 }

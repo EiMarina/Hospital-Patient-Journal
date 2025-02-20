@@ -13,6 +13,7 @@ public class Hospital {
     public Hospital() {
         this.patients = new ArrayList<>();
         new ArrayList<>();
+        
     }
     
     /**
@@ -61,13 +62,18 @@ public class Hospital {
     public void updatePatientStatus(int patientId, String status) {
     	 Patient patient = findPatientById(patientId);
         if (patient != null) {
-            patient.setStatus(status);
-            System.out.println("Updated patient status:\n" + patient);
+            patient.setStatus(status); //updating patient status
+            
+            //If the status changes to "Recover"  archive the patient
+            if ("Recovered".equalsIgnoreCase(status)) {
+            	PatientArchive.archivePatient(patient); //Saves the patient in the arcive
+            	System.out.println("Patient archived as recovered.");
+            }
         } else {
             System.out.println("Patient with ID " + patientId + " not found.");
         }
     }
-
+  
     /**
      * Searches for patients by family name.
      */
