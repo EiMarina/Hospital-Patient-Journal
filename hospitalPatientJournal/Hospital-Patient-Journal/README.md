@@ -10,7 +10,9 @@ This is a hospital patient journal management system. It allows users to manage 
 * Java 11+
 ## How to Install the Programm
 1. Clone the repository:
-> git clone (https://github.com/EiMarina/hospital-patient-journal.git)
+```
+git clone (https://github.com/EiMarina/hospital-patient-journal.git)
+```
 2. Navigate to the project directory:
 > cd (hospital-patient-journal)
 3. Compile and run the project:
