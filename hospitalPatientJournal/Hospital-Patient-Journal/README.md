@@ -37,7 +37,8 @@ When you select option 1, you'll be asked to provide the following information:
   * Diagnosis: Provide a diagnosis for the patient.
   * Department: Choose a department (Cardiology, Neurology, or Urology).
   * Status: Enter the patient's current status (e.g., Active, Recovered, etc.).
-```
+
+```ruby
 Enter the patient's last name: Ivanov
 Enter the patient's birth year: 1999
 Enter the patient's diagnosis: Kidney Stones
@@ -45,6 +46,7 @@ Choose the department (1 - Cardiology, 2 - Neurology, 3 - Urology): 3
 Enter the patient's status: Active
 The new patient will be added to the system and to the Urology department.
 ```
+
 ### Deleting a Patient
 Option 2 allows you to delete a patient by entering their unique patient ID.
 ### Updating Patient Status
