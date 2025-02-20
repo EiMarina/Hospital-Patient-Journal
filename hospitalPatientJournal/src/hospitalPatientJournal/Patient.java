@@ -9,17 +9,15 @@ public class Patient {
     private int birthYear; // Patient's birth year
     private String diagnosis; // Patient's diagnosis
     private Department department; // Department where the patient is treated
-    private String status; // Current status of the patient (e.g., "Active", "Recovered")
     private static int COUNTER = 0; // Counter to generate unique patient IDs
 
     // Constructor to initialize a new patient
-    public Patient(String familyName, int birthYear, String diagnosis, Department department, String status) {
+    public Patient(String familyName, int birthYear, String diagnosis, Department department) {
         this.id = ++COUNTER; // Automatically generate a unique ID
         this.familyName = familyName;
         this.birthYear = birthYear;
         this.diagnosis = diagnosis;
         this.department = department;
-        this.status = status;
     }
 
     // Getters and Setters
@@ -44,14 +42,6 @@ public class Patient {
         return department;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     /**
      * Returns a formatted string representation of the patient's information.
      */
@@ -62,7 +52,6 @@ public class Patient {
                "Year of Birth: " + birthYear + "\n" +
                "Diagnosis: " + diagnosis + "\n" +
                "Department: " + department.getName() + "\n" +
-               "Status: " + status + "\n" +
                "---------------------------";
     }
 
