@@ -1,13 +1,16 @@
 # Hospital-Patient-Journal
 This is a hospital patient journal management system. It allows users to manage and track patients in different hospital departments (such as Cardiology, Neurology, and Urology). The system supports adding, deleting, updating patient information, and searching for patients based on various criteria.
+
 ## Features
 * Add a new patient: Users can add new patients to the system, including their details (name, birth year, diagnosis, department and status).
 * Delete a patient: Users can remove patients from the system using their unique patient ID.
 * Update patient status: Allows changing the patient's status (e.g., Active, Recovered).
 * Search for a patient: Users can search for a patient by their last name (filtering if there are patients with the same last name), year of birth, or diagnosis.
 * Print patients by department: Users can print a list of patients in a specific department (Cardiology, Neurology, or Urology).
+
 ## Install dependencies
 * Java 11+
+
 ## How to Install the Programm
 1. Clone the repository:
 ```
@@ -30,6 +33,7 @@ Once the program starts, you'll see a menu with the following options:
 4. Search for a patient
 5. Print all patients in a department
 6. Exit the program
+   
 ### Adding a New Patient
 When you select option 1, you'll be asked to provide the following information:
   * Last Name: Enter the patient's last name.
@@ -49,17 +53,30 @@ The new patient will be added to the system and to the Urology department.
 
 ### Deleting a Patient
 Option 2 allows you to delete a patient by entering their unique patient ID.
+
 ### Updating Patient Status
 With option 3, you can update the patient's status (e.g., from Active to Recovered).
+
 ### Searching for Patients
 Option 4 allows you to search for a patient by their:
   * Last name (with option filtering by year of birth)
   * Year of birth
   * Diagnosis
+    
 ### Printing all the Patients of the Chosen Department
 With option 5, you can print the list of all patients from one of the following departments:
   * Cardiology
   * Neurology
   * Urology
+    
+## Code Structure
+### Main Class
+The Main class contains the main menu logic and methods for interacting with the system, such as adding, deleting, updating, and searching for patients.
+
+### Department Class
+The Department class represents a hospital department, such as Cardiology, Neurology, and Urology. It contains a list of patients and methods for adding/removing patients and printing the list of patients in the department.
+
+### Patient Class
+The Patient class holds information about an individual patient, such as their name, birth year, diagnosis, department, and status.
 ## Acknowledgements
   * Developers: Marina Eidelman, Katerina Fedorenko
