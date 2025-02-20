@@ -28,14 +28,10 @@ public class Main {
                 	deletePatient(scanner);
                     break;
                 case 3:
-                	// Update a patient's status
-                    updatePatientStatus(scanner);
-                    break;
-                case 4:
                 	// Search for a patient
                     searchPatient(scanner);
                     break;
-                case 5:
+                case 4:
                 	// Print all the patient of the chosen department
                 	printPatientsByDepartment(scanner);
                     break;
@@ -47,6 +43,7 @@ public class Main {
                 default:
                     System.out.println("Invalid choice! Try again.");
             }
+			printMenu();
         }
         scanner.close();
         }
@@ -57,18 +54,17 @@ public class Main {
 			+ "Please choose an option:\n"
 			+ "1- Add a New Patient\n"
 			+ "2- Delete a Patient\n"
-			+ "3- Update the Patient's Status\n"
-			+ "4- Search for a Patient\n"
-			+ "5- Print all the Patients of the Department\n"
+			+ "3- Search for a Patient\n"
+			+ "4- Print all the Patients of the Department\n"
 			+ "0 - Exit"
 			);		
 	 }
-        
-     
+         
      // Method adding a new patient
      private static void addNewPatient(Scanner scanner) {
         System.out.println("Enter patient's last name:");
-        String familyName = scanner.nextLine();
+        String familyName = scanner.next();
+        scanner.nextLine();
         System.out.println("Enter patient's birth year:");
         int birthYear = scanner.nextInt();
         System.out.println("Enter patient's diagnosis:");
@@ -92,11 +88,10 @@ public class Main {
                   return;
          }
 
-         System.out.println("Enter patient's status (Active, Recovered, etc.):");
-         String status = scanner.nextLine();
-
-         Patient newPatient = new Patient(familyName, birthYear, diagnosis, department, status);
+         Patient newPatient = new Patient(familyName, birthYear, diagnosis, department);
          department.addPatient(newPatient);
+         hospital.addPatient(newPatient);
+         System.out.println("New patient is added!");
       }
 
       // Method deleting a patient
@@ -105,16 +100,7 @@ public class Main {
          int patientId = scanner.nextInt();
          hospital.deletePatient(patientId);
       }
-      
-      // Method updating a patient's status
-      private static void updatePatientStatus(Scanner scanner) {
-         System.out.println("Enter patient ID to update status:");
-         int patientId = scanner.nextInt();
-         System.out.println("Enter new status:");
-         String status = scanner.next();
-         hospital.updatePatientStatus(patientId, status);
-      }
-      
+ 
       // Method searching for a patient
       private static void searchPatient(Scanner scanner) {
     	 int parameterChoice = 0;
@@ -206,19 +192,19 @@ public class Main {
       
        // Method printing all the patients of the chosen department
        private static void printPatientsByDepartment(Scanner scanner) {
-                System.out.println("Choose department (1 - Cardiology, 2 - Neurology, 3 - Urology):");
+                System.out.println("Choose department (1 - Urology, 2 - Cardiology, 3 - Neurology):");
                 int departmentChoice = scanner.nextInt();
                 Department department = null;
 
                 switch (departmentChoice) {
                      case 1:
-                         department = Department.CARDIOLOGY;
+                         department = Department.UROLOGY;
                          break;
                      case 2:
-                         department = Department.NEUROLOGY;
+                         department = Department.CARDIOLOGY;
                          break;
                      case 3:
-                         department = Department.UROLOGY;
+                         department = Department.NEUROLOGY;
                          break;
                      default:
                          System.out.println("Invalid department choice.");
@@ -229,56 +215,52 @@ public class Main {
         }
        
         private static void defaultPatients(Hospital hospital) {
-        	
-        	// Creates objects for the departments
-            Department urologyDepartment = new Department("Urology");
-            Department cardiologyDepartment = new Department("Cardiology");
-            Department neurologyDepartment = new Department("Neurology");
+   
 
             // Adds patients to the department and to the journal of the hospital 
-            Patient patient1 = new Patient("Ivanov", 1999, "Kidney Stones", urologyDepartment, "Active");
-            urologyDepartment.addPatient(patient1);
+            Patient patient1 = new Patient("Ivanov", 1999, "Kidney Stones",  Department.UROLOGY);
+            Department.UROLOGY.addPatient(patient1);
             hospital.addPatient(patient1);
             
-            Patient patient2 = new Patient("Petrov", 1984, "Prostate Enlargement", urologyDepartment, "Active");
-            urologyDepartment.addPatient(patient2);
+            Patient patient2 = new Patient("Petrov", 1984, "Prostate Enlargement", Department.UROLOGY);
+            Department.UROLOGY.addPatient(patient2);
             hospital.addPatient(patient2);
             
-            Patient patient3 = new Patient("Sidorov", 2001, "Urinary Tract Infection", urologyDepartment, "Active");
-            urologyDepartment.addPatient(patient3);
+            Patient patient3 = new Patient("Sidorov", 2001, "Urinary Tract Infection", Department.UROLOGY);
+            Department.UROLOGY.addPatient(patient3);
             hospital.addPatient(patient3);
             
-            Patient patient4 = new Patient("Kuznetsova", 1976, "Bladder Infection", urologyDepartment, "Active");
-            urologyDepartment.addPatient(patient4);
+            Patient patient4 = new Patient("Kuznetsova", 1976, "Bladder Infection", Department.UROLOGY);
+            Department.UROLOGY.addPatient(patient4);
             hospital.addPatient(patient4);
             
-            Patient patient5 = new Patient("Turner", 1999, "Myocarditis", cardiologyDepartment, "Active");
-            cardiologyDepartment.addPatient(patient5);
+            Patient patient5 = new Patient("Turner", 1999, "Myocarditis",  Department.CARDIOLOGY);
+            Department.CARDIOLOGY.addPatient(patient5);
             hospital.addPatient(patient5);
             
           
-            Patient patient6 = new Patient("Turner", 1986, "Heart Attack", cardiologyDepartment, "Active");
-            cardiologyDepartment.addPatient(patient6);
+            Patient patient6 = new Patient("Turner", 1986, "Heart Attack", Department.CARDIOLOGY);
+            Department.CARDIOLOGY.addPatient(patient6);
             hospital.addPatient(patient6);
             
-            Patient patient7 = new Patient("Davis", 2001, "Arrhythmia", cardiologyDepartment, "Active");
-            cardiologyDepartment.addPatient(patient7);
+            Patient patient7 = new Patient("Davis", 2001, "Arrhythmia", Department.CARDIOLOGY);
+            Department.CARDIOLOGY.addPatient(patient7);
             hospital.addPatient(patient7);
             
-            Patient patient8 = new Patient("Cohan", 1983, "Concussion", neurologyDepartment, "Active" );
-            cardiologyDepartment.addPatient(patient8);
+            Patient patient8 = new Patient("Cohan", 1983, "Concussion", Department.NEUROLOGY);
+            Department.NEUROLOGY.addPatient(patient8);
             hospital.addPatient(patient8);
             
-            Patient patient9 = new Patient("Davis", 2003, "Spinal Cord Injury", neurologyDepartment, "Active");
-            neurologyDepartment.addPatient(patient9);
+            Patient patient9 = new Patient("Davis", 2003, "Spinal Cord Injury", Department.NEUROLOGY);
+            Department.NEUROLOGY.addPatient(patient9);
             hospital.addPatient(patient9);
             
-            Patient patient10 = new Patient("Polansky", 1972, "Epilepsy", neurologyDepartment, "Active");
-            neurologyDepartment.addPatient(patient10);
+            Patient patient10 = new Patient("Polansky", 1972, "Epilepsy", Department.NEUROLOGY);
+            Department.NEUROLOGY.addPatient(patient10);
             hospital.addPatient(patient10);
             
-            Patient patient11 = new Patient("Steiman", 1998, "Concussion", neurologyDepartment, "Active");
-            neurologyDepartment.addPatient(patient11);
+            Patient patient11 = new Patient("Steiman", 1998, "Concussion", Department.NEUROLOGY);
+            Department.NEUROLOGY.addPatient(patient11);
             hospital.addPatient(patient11);	
         }      
  }            	

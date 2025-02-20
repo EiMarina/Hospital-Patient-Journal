@@ -3,9 +3,7 @@ package hospitalPatientJournal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Class representing a hospital department that contains a list of patients.
- */
+// Class representing a hospital department that contains a list of patients.
 public class Department {
     private String departmentName; // Name of the department
     private List<Patient> patients; // List of patients in the department
@@ -23,37 +21,27 @@ public class Department {
         departments.add(this);
     }
 
-    /**
-     * Returns the name of the department.
-     */
+    // Returns the name of the department.
     public String getName() {
         return departmentName;
     }
 
-    /**
-     * Adds a new patient.
-     */
+    // Adds a new patient.
     public void addPatient(Patient patient) {
         patients.add(patient);
     }
     
-    /**
-     * Deletes a patient.
-     */
+    //Deletes a patient.
 	public void removePatient(int patientId) {
 		  patients.removeIf(patient -> patient.getId() == patientId);	
 	}
     
-    /**
-     * Returns the list of patients in the department.
-     */
+    // Returns the list of patients in the department.
     public List<Patient> getPatients() {
         return patients;
     }
 
-    /**
-     * Prints all patients in the department.
-     */
+    //Prints all patients in the department.
     public void printPatients() {
         if (patients.isEmpty()) {
             System.out.println("There are no patients in the department " + departmentName + ".");
@@ -63,12 +51,5 @@ public class Department {
                 System.out.println(patient); // Uses the overridden toString() method
             }
         }
-    }
-
-    /**
-     * Returns the list of all departments.
-     */
-    public static List<Department> getAllDepartments() {
-        return departments;
     }
 }
