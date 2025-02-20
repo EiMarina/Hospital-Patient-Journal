@@ -24,12 +24,12 @@ java Main
 ```
 ## How to Run the Programm
 Once the program starts, you'll see a menu with the following options:
-* 1. Add a new patient
-* 2. Delete a patient
-* 3. Update a patient's status
-* 4. Search for a patient
-* 5. Print all patients in a department
-* 0. Exit the program
+1. Add a new patient
+2. Delete a patient
+3. Update a patient's status
+4. Search for a patient
+5. Print all patients in a department
+6. Exit the program
 ### Adding a New Patient
 When you select option 1, you'll be asked to provide the following information:
   * Last Name: Enter the patient's last name.
@@ -37,6 +37,14 @@ When you select option 1, you'll be asked to provide the following information:
   * Diagnosis: Provide a diagnosis for the patient.
   * Department: Choose a department (Cardiology, Neurology, or Urology).
   * Status: Enter the patient's current status (e.g., Active, Recovered, etc.).
+```
+Enter the patient's last name: Ivanov
+Enter the patient's birth year: 1999
+Enter the patient's diagnosis: Kidney Stones
+Choose the department (1 - Cardiology, 2 - Neurology, 3 - Urology): 3
+Enter the patient's status: Active
+The new patient will be added to the system and to the Urology department.
+```
 ### Deleting a Patient
 Option 2 allows you to delete a patient by entering their unique patient ID.
 ### Updating Patient Status
