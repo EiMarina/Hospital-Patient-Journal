@@ -4,28 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class representing a hospital that manages departments and patients.
+ * The Hospital class represents a hospital that manages a list of patients.
  */
 public class Hospital {
-    private List<Patient> patients; // List of all patients in the hospital
-    
-    // Constructor to initialize the hospital
+    private List<Patient> patients;
+
+    /**
+     * Constructor initializes an empty list of patients.
+     */
     public Hospital() {
         this.patients = new ArrayList<>();
-        new ArrayList<>();
-        
     }
-    
+
     /**
-     * Adds a new patient to the corresponding department.
+     * Adds a new patient to the hospital's list.
+     * 
+     * @param patient The patient to be added.
      */
     public void addPatient(Patient patient) {
-        this.patients.add(patient);
-    } 
+        patients.add(patient);
+    }
+
     /**
-     * Finds a patient by ID.
+     * Deletes a patient from the hospital by their ID.
+     * 
+     * @param patientId The ID of the patient to be removed.
+     * @return true if the patient was removed successfully, false otherwise.
      */
-    private Patient findPatientById(int patientId) {
+    public boolean deletePatient(int patientId) {
+        return patients.removeIf(patient -> patient.getId() == patientId);
+    }
+
+    /**
+     * Retrieves a patient by their ID.
+     * 
+     * @param patientId The ID of the patient to find.
+     * @return The patient object if found, otherwise null.
+     */
+    public Patient getPatientById(int patientId) {
         for (Patient patient : patients) {
             if (patient.getId() == patientId) {
                 return patient;
@@ -33,100 +49,29 @@ public class Hospital {
         }
         return null;
     }
-    
+
     /**
-     * Deletes a patient by their ID from the corresponding department.
+     * Retrieves a list of all patients in the hospital.
+     * 
+     * @return A copy of the patient list to prevent external modification.
      */
-    public void deletePatient(int patientId) {
-        Patient patientToDelete = null;
-        for (Patient patient : patients) {
-            if (patient.getId() == patientId) {
-                patientToDelete = patient;
-                break;
-            }
-        }
-        if (patientToDelete != null) {
-        	String familyName = patientToDelete.getFamilyName();
-            patientToDelete.getDepartment().removePatient(patientId); // Deletes a patient from the department
-            patients.remove(patientToDelete); // Deletes a patient from the journal
-            System.out.println("Patient with ID " + patientId + " and last name " + familyName + " is deleted!");
-        } else {
-            System.out.println("Patient with ID " + patientId + " is not found.");
-        }
+    public List<Patient> getPatients() {
+        return new ArrayList<>(patients);
     }
-    
+
     /**
-     * Updates the status of a patient based on their ID.
-     * If the patient is found, the updated information is printed.
-     */
-    public void updatePatientStatus(int patientId, String status) {
-    	 Patient patient = findPatientById(patientId);
-        if (patient != null) {
-            patient.setStatus(status); //updating patient status
-            
-            //If the status changes to "Recover"  archive the patient
-            if ("Recovered".equalsIgnoreCase(status)) {
-            	PatientArchive.archivePatient(patient); //Saves the patient in the arcive
-            	System.out.println("Patient archived as recovered.");
-            }
-        } else {
-            System.out.println("Patient with ID " + patientId + " not found.");
-        }
-    }
-  
-    /**
-     * Searches for patients by family name.
+     * Searches for patients by their last name.
+     * 
+     * @param familyName The last name of the patient(s) to search for.
+     * @return A list of patients with the matching last name.
      */
     public List<Patient> searchByFamilyName(String familyName) {
-        List<Patient> filteredPatients = new ArrayList<>();
-        if (familyName == null) return filteredPatients;
+        List<Patient> result = new ArrayList<>();
         for (Patient patient : patients) {
             if (patient.getFamilyName().equalsIgnoreCase(familyName)) {
-                filteredPatients.add(patient);
+                result.add(patient);
             }
         }
-        return filteredPatients;
+        return result;
     }
-
-    /**
-     * Searches for patients by the year of birth.
-     */
-     public List<Patient> searchByBirthYear(int birthYear) {
-         List<Patient> filteredPatients = new ArrayList<>();
-    	 for (Patient patient : patients) {
-    	     if (patient.getBirthYear() == birthYear) {
-    	         filteredPatients.add(patient);
-    	     }
-    	     }
-    	 return filteredPatients;
-    }
-
-    /**
-     * Searches for patients by family name and year of birth.
-     */
-    public List<Patient> searchByFamilyNameAndBirthYear(String familyName, int birthYear) {
-        List<Patient> filteredPatients = new ArrayList<>();
-        if (familyName == null) return filteredPatients;
-        for (Patient patient : patients) {
-            if (patient.getFamilyName().equalsIgnoreCase(familyName) && patient.getBirthYear() == birthYear) {
-                filteredPatients.add(patient);
-            }
-        }
-        return filteredPatients;
-    }
-    
-    /**
-     * Searches for patients by diagnosis.
-     */
-    public List<Patient> searchByDiagnosis(String diagnosis) {
-        List<Patient> filteredPatients = new ArrayList<>();
-        if (diagnosis == null) return filteredPatients;
-        for (Patient patient : patients) {
-        if (patient.getDiagnosis().equalsIgnoreCase(diagnosis)) {
-            filteredPatients.add(patient);
-            }
-        }
-        return filteredPatients;
-        
-    }    
 }
